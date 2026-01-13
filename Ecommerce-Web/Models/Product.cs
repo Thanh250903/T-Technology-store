@@ -13,8 +13,11 @@ namespace Ecommerce_Web.Models
         public string Name { get; set; }
         //public int Quantity { get; set; }
         public decimal Price { get; set; }
+        [Required]
+        [MaxLength(450)]
+        [ForeignKey("Category")]
         public string CategoryId { get; set; }
-        [ForeignKey("categoryId")]
+
         [ValidateNever]
         public Category Category { get; set; }
         public string? ImageUrl { get; set; }
