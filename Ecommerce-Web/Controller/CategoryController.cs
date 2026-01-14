@@ -32,5 +32,56 @@ namespace Ecommerce_Web.Controllers
             _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(string? id)
+        {
+            if(id == null || id.Length == 0)
+            {
+                return NotFound();
+            }
+
+            var editCategory = _dbContext.Categories.
+                            FirstOrDefault(category => category.Id == id);
+
+            if(editCategory == null)
+            {
+                return NotFound();
+            }
+            return View(editCategory);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            _dbContext.Categories.Update(category);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(string? id)
+        {
+            if(id == null || id.Length == 0)
+            {
+                return NotFound();
+            }
+
+            var deletedCategory = _dbContext.Categories.
+                                  FirstOrDefault(category => category.Id == id);
+
+            if(deletedCategory == null)
+            {
+                return NotFound();
+            }
+            return View(deletedCategory);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Category category)
+        {
+            _dbContext.Categories.Remove(category);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }

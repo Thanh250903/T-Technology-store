@@ -1,0 +1,23 @@
+﻿@using Ecommerce_Web.Models
+@model Category
+
+<h2>Edit Category</h2>
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="mb-3 row">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 row">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" />
+            <span asp-validation-for="Description"></span>
+        </div>
+
+        <button type="submit" asp-action="Edit" class="btn btn-primary">Edit</button>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-primary">Back to list</a>
+    </div>
+
+</form>
