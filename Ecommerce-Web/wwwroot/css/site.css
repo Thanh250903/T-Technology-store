@@ -20,3 +20,81 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Base notification */
+.notification {
+    position: relative;
+    padding: 14px 44px 14px 16px;
+    margin: 16px 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    animation: slideFadeIn 0.45s ease forwards;
+}
+
+    /* Success */
+    .notification.success {
+        background: linear-gradient(135deg, #e6f9ee, #d1f3e0);
+        color: #1e7e34;
+        border-left: 5px solid #28a745;
+    }
+
+    /* Error */
+    .notification.error {
+        background: linear-gradient(135deg, #fdecea, #f8d7da);
+        color: #842029;
+        border-left: 5px solid #dc3545;
+    }
+
+    /* Message */
+    .notification .message {
+        flex: 1;
+        padding-right: 10px;
+    }
+
+    /* Close button */
+    .notification .close-btn {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: inherit;
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+    }
+
+        .notification .close-btn:hover {
+            opacity: 1;
+        }
+
+    /* Hide animation */
+    .notification.hide {
+        animation: slideFadeOut 0.35s ease forwards;
+    }
+
+/* Animations */
+@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+}

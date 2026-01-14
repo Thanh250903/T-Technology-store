@@ -27,9 +27,16 @@ namespace Ecommerce_Web.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
+            if(!ModelState.IsValid)
+            {
+                TempData["errorMessage"] = "Invalid data. Please try again.";
+                return View(category);
+            }
+
             category.Id = Guid.NewGuid().ToString();
             _dbContext.Categories.Add(category);
             _dbContext.SaveChanges();
+            TempData["successMessage"] = "Category created successfully!";
             return RedirectToAction("Index");
         }
 
@@ -37,6 +44,7 @@ namespace Ecommerce_Web.Controllers
         {
             if(id == null || id.Length == 0)
             {
+                TempData["errorMessage"] = "Category not found.";
                 return NotFound();
             }
 
@@ -45,6 +53,7 @@ namespace Ecommerce_Web.Controllers
 
             if(editCategory == null)
             {
+                TempData["errorMessage"] = "Category not found.";
                 return NotFound();
             }
             return View(editCategory);
@@ -55,6 +64,7 @@ namespace Ecommerce_Web.Controllers
         {
             _dbContext.Categories.Update(category);
             _dbContext.SaveChanges();
+            TempData["successMessage"] = "Category updated successfully!";
             return RedirectToAction("Index");
         }
 
@@ -62,6 +72,7 @@ namespace Ecommerce_Web.Controllers
         {
             if(id == null || id.Length == 0)
             {
+                TempData["errorMessage"] = "Category not found.";
                 return NotFound();
             }
 
@@ -70,6 +81,7 @@ namespace Ecommerce_Web.Controllers
 
             if(deletedCategory == null)
             {
+                TempData["errorMessage"] = "Category not found.";
                 return NotFound();
             }
             return View(deletedCategory);
@@ -80,6 +92,7 @@ namespace Ecommerce_Web.Controllers
         {
             _dbContext.Categories.Remove(category);
             _dbContext.SaveChanges();
+            TempData["successMessage"] = "Category deleted successfully!";
             return RedirectToAction("Index");
         }
 

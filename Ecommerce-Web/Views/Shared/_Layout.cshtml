@@ -32,6 +32,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @await Html.PartialAsync("_Notification")
             @RenderBody()
         </main>
     </div>
@@ -47,5 +48,18 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function closeNotification(button) {
+            const notification = button.closest('.notification');
+            notification.classList.add('hide');
+
+            setTimeout(() => {
+                notification.remove();
+            }, 350);
+        }
+    </script>
+
+
 </body>
 </html>
