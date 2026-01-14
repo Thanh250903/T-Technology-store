@@ -18,7 +18,7 @@ namespace Ecommerce_Web.Controllers
             List<Category> categories = _dbContext.Categories.ToList();
             return View(categories);
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -27,11 +27,9 @@ namespace Ecommerce_Web.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            if (ModelState.IsValid)
-            {
-                _dbContext.Categories.Add(category);
-                _dbContext.SaveChanges();
-            }
+            category.Id = Guid.NewGuid().ToString();
+            _dbContext.Categories.Add(category);
+            _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
     }
