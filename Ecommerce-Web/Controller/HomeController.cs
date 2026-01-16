@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Ecommerce_Web.Models;
+using Ecommerce_Web.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Ecommerce_Web.Controllers
@@ -16,7 +19,6 @@ namespace Ecommerce_Web.Controllers
         {
             return View();
         }
-
 
     }
 }
