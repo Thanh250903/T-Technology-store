@@ -1,0 +1,66 @@
+﻿@using Ecommerce_Web.Models.ViewModels
+@model ProductVM
+
+<h2 class="mb-4">Create Product</h2>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <!-- Name -->
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Price -->
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <!-- Category -->
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label"></label>
+                <select asp-for="CategoryId"
+                        class="form-select"
+                        asp-items="Model.Categories">
+                    <option value="">-- Select category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <!-- CreateAt -->
+            <div class="mb-3">
+                <label asp-for="CreateAt" class="form-label"></label>
+                <input asp-for="CreateAt" type="datetime-local" class="form-control" />
+                <span asp-validation-for="CreateAt" class="text-danger"></span>
+            </div>
+
+            <!-- IsActive -->
+            <div class="form-check mb-4">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label asp-for="IsActive" class="form-check-label"></label>
+            </div>
+
+            <!-- Actions -->
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    Save
+                </button>
+                <a asp-controller="Product"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    Back to list
+                </a>
+            </div>
+
+        </div>
+    </div>
+</form>

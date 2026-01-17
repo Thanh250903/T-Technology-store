@@ -16,7 +16,7 @@ namespace Ecommerce_Web.Models
         [Required]
         [MaxLength(450)]
         [ForeignKey("Category")]
-        public string CategoryId { get; set; }
+        public string CategoryId { get; set; } // FK
 
         [ValidateNever]
         public Category Category { get; set; }

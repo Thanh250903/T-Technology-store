@@ -25,19 +25,27 @@ namespace Ecommerce_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Category category)
         {
-            if(!ModelState.IsValid)
+            // ensure Id exists before any DB operation
+            if (string.IsNullOrWhiteSpace(category.Id))
             {
-                TempData["errorMessage"] = "Invalid data. Please try again.";
-                return View(category);
+                category.Id = Guid.NewGuid().ToString();
+            }
+            // Delete old validation of Id
+            ModelState.Remove(nameof(Category.Id));
+
+            if (ModelState.IsValid)
+            {
+                _dbContext.Categories.Add(category);
+                _dbContext.SaveChanges();
+                TempData["successMessage"] = "Category created successfully!";
+                return RedirectToAction("Index");
             }
 
-            category.Id = Guid.NewGuid().ToString();
-            _dbContext.Categories.Add(category);
-            _dbContext.SaveChanges();
-            TempData["successMessage"] = "Category created successfully!";
-            return RedirectToAction("Index");
+            TempData["errorMessage"] = "Invalid data. Please try again.";
+            return View(category);
         }
 
         public IActionResult Edit(string? id)
