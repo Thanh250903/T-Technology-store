@@ -1,0 +1,44 @@
+﻿@using Ecommerce_Web.Models.ViewModels
+@model ProductVM
+
+<h2>Edit product</h2>
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="mb-3 row">
+          <label asp-for="Name"></label>
+          <input asp-for="Name" />
+          <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 row">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 row">
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId"
+                    class="form-select"
+                     asp-items="Model.Categories">
+            <option value="">--Select Category--</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 row">
+            <label asp-for="CreateAt"></label>
+            <input asp-for="CreateAt" />
+            <span asp-validation-for="CreateAt" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mb-4">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label asp-for="IsActive" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" asp-controller="Product" asp-action="Edit" class="btn btn-danger">Edit</button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">Back to list</a>
+
+        </div>
+</form>

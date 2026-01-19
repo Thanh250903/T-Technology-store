@@ -1,5 +1,5 @@
-﻿@using Ecommerce_Web.Models
-@model List<Product>
+﻿@using Ecommerce_Web.Models.ViewModels
+@model List<ProductVM>
 @{
     ViewData["Title"] = "Product List";
 }
@@ -17,6 +17,7 @@
 		<thead>
 			<tr>
 				<td>Name</td>
+				<td>Category</td>
 				<td>Price</td>
 				<td>CreateAt</td>
 				<td>IsActive</td>
@@ -29,6 +30,7 @@
 			{
 				<tr>
 					<td>@product.Name</td>
+					<td>@product.CategoryName</td>
 					<td>@product.Price</td>
 					<td>@product.CreateAt</td>
 					<td>@product.IsActive</td>

@@ -10,6 +10,7 @@ namespace Ecommerce_Web.Models.ViewModels
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string CategoryId { get; set; } //FK
+        public string? CategoryName { get; set; }
         public string? ImageUrl { get; set; }
         public DateTime CreateAt { get; set; }
         public bool IsActive { get; set; }
