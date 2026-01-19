@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Linq;
 
 namespace Ecommerce_Web.Controllers
 {
@@ -45,7 +46,8 @@ namespace Ecommerce_Web.Controllers
             //Bind categories to dropdown
             var productVM = new ProductVM()
             {
-                Categories = _dbContext.Categories.Select(c => new SelectListItem
+                Categories = _dbContext.Categories
+                                       .Select(c => new SelectListItem
                 {
                     Value = c.Id,
                     Text = c.Name
@@ -79,7 +81,8 @@ namespace Ecommerce_Web.Controllers
             //Reload dropdown of category
             else
             {
-                productVM.Categories = _dbContext.Categories.Select(c => new SelectListItem
+                productVM.Categories = _dbContext.Categories
+                                       .Select(c => new SelectListItem
                 {
                     Value = c.Id,
                     Text = c.Name
@@ -117,7 +120,8 @@ namespace Ecommerce_Web.Controllers
                 CategoryId = editProduct.CategoryId,
                 CreateAt = editProduct.CreateAt,
                 IsActive = editProduct.IsActive,
-                Categories = _dbContext.Categories.Select(c => new SelectListItem
+                Categories = _dbContext.Categories
+                             .Select(c => new SelectListItem
                 {
                     Value = c.Id,
                     Text = c.Name
@@ -156,13 +160,70 @@ namespace Ecommerce_Web.Controllers
             }
 
             // On error, reload categories and return view
-            productVM.Categories = _dbContext.Categories.Select(cate => new SelectListItem
+            productVM.Categories = _dbContext.Categories
+                                   .Select(cate => new SelectListItem
             {
                 Value = cate.Id,
                 Text = cate.Name
             }).ToList();
 
             return View(productVM);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(string? id)
+        {
+            if(id == null || id.Length == 0)
+            {
+                TempData["errorMessage"] = "Product not found";
+                return NotFound();
+            }
+
+            var deletedProduct = await _dbContext.Products
+                                 .Include(category => category.Category)
+                                 .FirstOrDefaultAsync(product => product.Id == id);
+
+            if (deletedProduct == null)
+            {
+                TempData["errorMessage"] = "Product not found";
+                return NotFound();
+            }
+
+            ProductVM productVM = new ProductVM
+            {
+                Id = deletedProduct.Id,
+                Name = deletedProduct.Name,
+                Price = deletedProduct.Price,
+                CategoryId = deletedProduct.CategoryId,
+                CategoryName = deletedProduct.Category.Name != null ? deletedProduct.Category.Name : string.Empty,
+                CreateAt = deletedProduct.CreateAt,
+                IsActive = deletedProduct.IsActive,
+            };
+
+            return View(productVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(ProductVM productVM)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var productDeleted = _dbContext.Products
+                                     .FirstOrDefault(product => product.Id == productVM.Id);
+
+                if (productDeleted == null)
+                {
+                    TempData["errorMessage"] = "Product not found";
+                    return NotFound();
+                }
+
+                _dbContext.Products.Remove(productDeleted);
+                _dbContext.SaveChanges();
+                TempData["successMessage"] = "Product deleted successfully";
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

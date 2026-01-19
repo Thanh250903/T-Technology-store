@@ -1,0 +1,45 @@
+﻿@using Ecommerce_Web.Models.ViewModels
+@model ProductVM
+
+<h2>Delete Product</h2>
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CategoryId" />
+        <div class="mb-3 row">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control " readonly />
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control " readonly />
+        </div>
+
+        <div class="mb-3 row">
+            <label asp-for="CategoryName"></label>
+            <input asp-for="CategoryName" class="form-control " readonly />
+        </div>
+
+        <div class="mb-3 row">
+            <label asp-for="CreateAt"></label>
+            <input asp-for="CreateAt" class="form-control " readonly />
+        </div>
+
+        <div class="mb-4 d-flex align-items-center gap-1">
+            <label asp-for="IsActive" class="form-label mb-0"></label>
+
+            <input asp-for="IsActive"
+                   class="form-check-input"
+                   disabled />
+
+            <input type="hidden" asp-for="IsActive" />
+        </div>
+
+        <button type="submit" asp-controller="Product" asp-action="Delete" class="btn btn-danger">Delete</button>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">Back to list</a>
+    </div>
+
+
+
+</form>

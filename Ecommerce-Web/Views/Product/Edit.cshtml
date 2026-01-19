@@ -32,12 +32,12 @@
             <span asp-validation-for="CreateAt" class="text-danger"></span>
         </div>
 
-        <div class="form-check mb-4">
+        <div class="mb-4 d-flex align-items-center gap-1">
+            <label asp-for="IsActive" class="form-check-label mb-0"></label>
             <input asp-for="IsActive" class="form-check-input" />
-            <label asp-for="IsActive" class="form-check-label"></label>
         </div>
 
-        <button type="submit" asp-controller="Product" asp-action="Edit" class="btn btn-danger">Edit</button>
+        <button type="submit" asp-controller="Product" asp-action="Edit" class="btn btn-primary">Edit</button>
         <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">Back to list</a>
 
         </div>
