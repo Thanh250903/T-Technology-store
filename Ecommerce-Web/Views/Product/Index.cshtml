@@ -25,23 +25,37 @@
 				<td>Action</td>
 			</tr>
 		</thead>
-		<tbody>
-			@foreach (var product in Model)
-			{
-				<tr>
-					<td>@product.Name</td>
-					<td>@product.CategoryName</td>
-					<td>@product.Price</td>
-					<td>@product.CreateAt</td>
-					<td>@product.IsActive</td>
-					<td></td>
-				
-					<td>
-						<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary">Edit</a>
-						<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
-					</td>
-				</tr>
-			}
-		</tbody>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.CategoryName</td>
+                    <td>@product.Price</td>
+                    <td>@product.CreateAt</td>
+                    <td>@product.IsActive</td>
+
+                    <!-- IMAGE COLUMN -->
+                    <td>
+                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                        {
+                            <img src="@product.ImageUrl" width="60" alt="product image"
+                                 style="object-fit:cover; border-radius:6px;" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">Image not added</span>
+                        }
+                    </td>
+
+                    <!-- ACTION COLUMN -->
+                    <td>
+                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary btn-sm">Edit</a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
 	</table>
 </div>

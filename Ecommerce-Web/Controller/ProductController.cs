@@ -14,11 +14,13 @@ namespace Ecommerce_Web.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ILogger<ProductController> _logger;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(ApplicationDbContext dbContext, ILogger<ProductController> logger)
+        public ProductController(ApplicationDbContext dbContext, ILogger<ProductController> logger, IWebHostEnvironment webHostEnvironment)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -58,10 +60,38 @@ namespace Ecommerce_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Create(ProductVM productVM, IFormFile? formFile)
         {
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (formFile != null && formFile.Length > 0)
+                {
+                    // upload image to wwwroot/img/products
+                    string uploadsFolder = Path.Combine(wwwRootPath, @"img\products");
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+
+                    try
+                    {
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            formFile.CopyTo(fileStream);
+                        }
+                        productVM.ImageUrl = @"\img\products\" + fileName;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", "Image upload error: " + ex.Message);
+                        return View(productVM);
+                    }
+                }
+
                 var product = new Product
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -69,8 +99,8 @@ namespace Ecommerce_Web.Controllers
                     Price = productVM.Price,
                     CategoryId = productVM.CategoryId,
                     CreateAt = productVM.CreateAt,
-                    IsActive = productVM.IsActive
-
+                    IsActive = productVM.IsActive,
+                    ImageUrl = productVM.ImageUrl
                 };
 
                 _dbContext.Products.Add(product);

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Migration\" />
+    <Folder Include="wwwroot\img\products\" />
   </ItemGroup>
 
   <ItemGroup>
