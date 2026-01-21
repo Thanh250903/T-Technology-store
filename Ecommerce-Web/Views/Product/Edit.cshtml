@@ -36,14 +36,33 @@
             <label asp-for="IsActive" class="form-check-label mb-0"></label>
             <input asp-for="IsActive" class="form-check-input" />
         </div>
+
         <div class="mb-3 row">
-            <label asp-for="ImageUrl"></label>
-            <input type="file" name="formFile" class="form-control" />
+            <label class="mb-2">Image</label>
 
+            <div class="img-preview-wrapper mb-2" style="display:inline-block;">
+                @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                {
+                    <img id="imgThumb" src="@Model.ImageUrl" class="img-thumb" alt="current image" />
+                }
+                else
+                {
+                    <img id="imgThumb" src="" class="img-thumb d-none" alt="current image" />
+                }
+            </div>
+
+            <input type="file" name="formFile" id="formFile" class="form-control mt-2" />
         </div>
-
         <button type="submit" asp-controller="Product" asp-action="Edit" class="btn btn-primary">Edit</button>
         <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">Back to list</a>
 
         </div>
 </form>
+
+<div id="imageZoomOverlay" class="image-zoom-overlay" aria-hidden="true">
+    <div class="image-zoom-content" role="dialog" aria-modal="true">
+        <button type="button" id="imageZoomClose" class="image-zoom-close" aria-label="Close">✕</button>
+        <img id="imageZoomImg" src="" alt="Zoom image" />
+    </div>
+</div>
+

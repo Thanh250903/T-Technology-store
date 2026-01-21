@@ -150,6 +150,7 @@ namespace Ecommerce_Web.Controllers
                 CategoryId = editProduct.CategoryId,
                 CreateAt = editProduct.CreateAt,
                 IsActive = editProduct.IsActive,
+                ImageUrl = editProduct.ImageUrl,
                 Categories = _dbContext.Categories
                              .Select(c => new SelectListItem
                 {

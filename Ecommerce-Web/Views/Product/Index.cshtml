@@ -3,59 +3,97 @@
 @{
     ViewData["Title"] = "Product List";
 }
-<div class="row pt-4 pb-4">
-	<div class="col-6">
-		<h2>List of Product</h2>
-	</div>
-	<div class="col-6">
-		<a asp-controller="Product" asp-action="Create" class="btn btn-primary">Create a Product</a>
-	</div>
-</div>
 
-<div>
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<td>Name</td>
-				<td>Category</td>
-				<td>Price</td>
-				<td>CreateAt</td>
-				<td>IsActive</td>
-				<td>Image</td>
-				<td>Action</td>
-			</tr>
-		</thead>
-        <tbody>
-            @foreach (var product in Model)
-            {
+<div class="product-index container py-4">
+
+    <!-- Header -->
+    <div class="product-index__header">
+        <h2 class="product-index__title">List of Products</h2>
+
+        <a asp-controller="Product" asp-action="Create" class="btn btn-success">
+            Add new product
+        </a>
+    </div>
+
+    <!-- Toolbar  -->
+    <div class="product-index__toolbar">
+        <div class="toolbar-left">
+            <div class="product-search">
+                <span class="search-icon">🔎</span>
+                <input class="form-control" type="text" placeholder="Search a product" />
+            </div>
+        </div>
+
+        <div class="toolbar-right">
+            <select class="form-select toolbar-select">
+                <option selected>Filter by</option>
+                <option href="#">Name</option>
+                <option href="#">Category</option>
+                <option href="#">Day create</option>
+                <option href="#">Active status</option>
+            </select>
+
+            <select class="form-select toolbar-select">
+                <option selected>Sort by</option>
+                <option href="#">Price low-high</option>
+                <option href="#">Price high-low</option>
+                <option>Newest</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Table card -->
+    <div class="product-table-card">
+        <table class="table product-table">
+            <thead>
                 <tr>
-                    <td>@product.Name</td>
-                    <td>@product.CategoryName</td>
-                    <td>@product.Price</td>
-                    <td>@product.CreateAt</td>
-                    <td>@product.IsActive</td>
-
-                    <!-- IMAGE COLUMN -->
-                    <td>
-                        @if (!string.IsNullOrEmpty(product.ImageUrl))
-                        {
-                            <img src="@product.ImageUrl" width="60" alt="product image"
-                                 style="object-fit:cover; border-radius:6px;" />
-                        }
-                        else
-                        {
-                            <span class="text-muted">Image not added</span>
-                        }
-                    </td>
-
-                    <!-- ACTION COLUMN -->
-                    <td>
-                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-primary btn-sm">Edit</a>
-                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
+                    <td>Name</td>
+                    <td>Category</td>
+                    <td>Price</td>
+                    <td>CreateAt</td>
+                    <td>IsActive</td>
+                    <td>Image</td>
+                    <td style="width:160px; text-align:center;">Action</td>
                 </tr>
-            }
-        </tbody>
+            </thead>
 
-	</table>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.CategoryName</td>
+                        <td>@product.Price</td>
+                        <td>@product.CreateAt</td>
+                        <td>@product.IsActive</td>
+
+                        <td class="img-td">
+                            @if (!string.IsNullOrEmpty(product.ImageUrl))
+                            {
+                                <div class="img-box">
+                                    <img src="@product.ImageUrl" class="product-img" alt="product image" />
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Image not added</span>
+                            }
+                        </td>
+
+                        <td>
+                            <div class="action-btns">
+                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id"
+                                   class="btn btn-primary btn-sm">
+                                   Edit</a>
+
+                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
+                                   class="btn btn-danger btn-sm"> 
+                                   Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
