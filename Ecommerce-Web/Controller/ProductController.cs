@@ -163,7 +163,7 @@ namespace Ecommerce_Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(ProductVM productVM)
+        public IActionResult Edit(ProductVM productVM, IFormFile? formFile)
         {
 
             var updatedProduct = _dbContext.Products
@@ -178,6 +178,22 @@ namespace Ecommerce_Web.Controllers
             // Update product
             if (ModelState.IsValid)
             {
+
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (formFile != null && formFile.Length > 0)
+                {
+                    // upload image to wwwroot/img/products
+                    string uploadsFolder = Path.Combine(wwwRootPath, @"img\products");
+                    string fileName = Path.GetFileName(formFile.FileName);
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+
+                    using(var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        formFile.CopyTo(fileStream);
+                    }
+                    updatedProduct.ImageUrl = @"\img\products\" + fileName;
+                }
+                   
                 updatedProduct.Name = productVM.Name;
                 updatedProduct.Price = productVM.Price;
                 updatedProduct.CategoryId = productVM.CategoryId;
@@ -227,6 +243,7 @@ namespace Ecommerce_Web.Controllers
                 CategoryName = deletedProduct.Category.Name != null ? deletedProduct.Category.Name : string.Empty,
                 CreateAt = deletedProduct.CreateAt,
                 IsActive = deletedProduct.IsActive,
+                ImageUrl = deletedProduct.ImageUrl
             };
 
             return View(productVM);

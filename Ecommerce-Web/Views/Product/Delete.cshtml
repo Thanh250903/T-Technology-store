@@ -35,7 +35,10 @@
 
             <input type="hidden" asp-for="IsActive" />
         </div>
-
+        <div class="mb-3 row">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" readonly />
+        </div>
         <button type="submit" asp-controller="Product" asp-action="Delete" class="btn btn-danger">Delete</button>
         <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">Back to list</a>
     </div>

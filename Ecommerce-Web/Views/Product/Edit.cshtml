@@ -2,7 +2,7 @@
 @model ProductVM
 
 <h2>Edit product</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div class="border p-3 mt-4">
         <div class="mb-3 row">
           <label asp-for="Name"></label>
@@ -35,6 +35,11 @@
         <div class="mb-4 d-flex align-items-center gap-1">
             <label asp-for="IsActive" class="form-check-label mb-0"></label>
             <input asp-for="IsActive" class="form-check-input" />
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="ImageUrl"></label>
+            <input type="file" name="formFile" class="form-control" />
+
         </div>
 
         <button type="submit" asp-controller="Product" asp-action="Edit" class="btn btn-primary">Edit</button>
