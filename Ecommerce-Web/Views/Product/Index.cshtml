@@ -4,21 +4,21 @@
     ViewData["Title"] = "Product List";
 }
 
-<div class="product-index container py-4">
+<div class="common-index container py-4">
 
     <!-- Header -->
-    <div class="product-index__header">
-        <h2 class="product-index__title">List of Products</h2>
+    <div class="common-index__header">
+        <h2 class="common-index__title">List of Products</h2>
 
         <a asp-controller="Product" asp-action="Create" class="btn btn-success">
-            Add new product
+            Add new Product
         </a>
     </div>
 
     <!-- Toolbar  -->
-    <div class="product-index__toolbar">
+    <div class="common-index__toolbar">
         <div class="toolbar-left">
-            <div class="product-search">
+            <div class="common-search">
                 <span class="search-icon">🔎</span>
                 <input class="form-control" type="text" placeholder="Search a product" />
             </div>
@@ -43,15 +43,15 @@
     </div>
 
     <!-- Table card -->
-    <div class="product-table-card">
-        <table class="table product-table">
+    <div class="common-table-card">
+        <table class="table common-table">
             <thead>
                 <tr>
                     <td>Name</td>
                     <td>Category</td>
                     <td>Price</td>
                     <td>CreateAt</td>
-                    <td>IsActive</td>
+                    <td>Status</td>
                     <td>Image</td>
                     <td style="width:160px; text-align:center;">Action</td>
                 </tr>
@@ -65,7 +65,22 @@
                         <td>@product.CategoryName</td>
                         <td>@product.Price</td>
                         <td>@product.CreateAt</td>
-                        <td>@product.IsActive</td>
+                        <td class="status-td">
+                            @if (product.IsActive)
+                            {
+                                <span class="status-dot status-dot--active" title="Active">
+                                    <i class="bi bi-check-lg"></i>
+                                    Active
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status-dot status-dot--inactive" title="Inactive">
+                                    <i class="bi bi-x-lg"></i>
+                                 Inactive
+                                </span>
+                            }
+                        </td>
 
                         <td class="img-td">
                             @if (!string.IsNullOrEmpty(product.ImageUrl))
