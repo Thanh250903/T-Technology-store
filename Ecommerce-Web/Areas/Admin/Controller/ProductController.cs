@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
 
-namespace Ecommerce_Web.Controllers
+namespace Ecommerce_Web.Areas.Admin.Controllers
 {
     public class ProductController : Controller
     {

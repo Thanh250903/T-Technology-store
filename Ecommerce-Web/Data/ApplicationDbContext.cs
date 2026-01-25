@@ -1,4 +1,5 @@
 ﻿using Ecommerce_Web.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce_Web.Data

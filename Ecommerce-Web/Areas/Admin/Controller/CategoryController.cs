@@ -3,7 +3,7 @@ using Ecommerce_Web.Models;
 using Ecommerce_Web.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ecommerce_Web.Controllers
+namespace Ecommerce_Web.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
