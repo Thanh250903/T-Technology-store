@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace Ecommerce_Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _dbContext;

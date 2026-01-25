@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\User\" />
+    <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Migration\" />
     <Folder Include="wwwroot\img\products\" />
   </ItemGroup>

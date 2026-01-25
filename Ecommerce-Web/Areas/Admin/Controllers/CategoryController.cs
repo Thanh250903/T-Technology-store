@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce_Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
