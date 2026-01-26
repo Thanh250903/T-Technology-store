@@ -1,0 +1,125 @@
+﻿.page-product {
+    padding: 20px;
+}
+
+.product-section {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.section-header h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* GRID */
+.product-grid {
+    display: grid;
+    /* responsive columns with a minimum card width */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 13px;
+}
+
+/* PRODUCT CARD */
+
+.product-item {
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    padding: 10px;
+    transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+    .product-item:hover {
+        box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+        transform: translateY(-3px);
+    }
+
+/* DISCOUNT */
+/*.discount-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #e53935;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}*/
+
+/* LINK */
+.product-card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* IMAGE */
+.product-img {
+    width: 100%;
+    height: 180px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #f8f8f8;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: inherit;
+}
+
+/* NAME */
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.3;
+    margin: 8px 0 6px 0;
+    height: 44px; /* reserve fixed height for two lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* PRICE */
+.product-price {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.price-current {
+    color: #e53935;
+    font-weight: bolder;
+}
+
+.price-old {
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* RATING */
+.product-rating {
+    font-size: 13px;
+    color: #f9a825;
+    margin-top: 4px;
+}
+
+/* ACTION */    
+.product-action {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #1976d2;
+    cursor: pointer;
+}

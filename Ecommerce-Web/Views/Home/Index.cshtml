@@ -1,8 +1,65 @@
-﻿@{
-    ViewData["Title"] = "Home page";
-}
+﻿@using Ecommerce_Web.Models
+@model IEnumerable<Product>
+    <link rel="stylesheet" href="~/css/home-product.css" asp-append-version="true" />
+<div class="page-product">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <section class="product-section">
+
+        <div class="section-header">
+            <h2>New Arrivals</h2>
+        </div>
+
+        <!-- GRID CONTAINER -->
+        <div class="product-grid">
+
+            @foreach (var product in Model)
+            {
+                <!-- PRODUCT ITEM -->
+                <div class="product-item">
+
+                    <!-- Discount badge -->
+                   @*  <span class="discount-badge">-21%</span> *@
+
+                    <a class="product-card"
+                       asp-controller="Home"
+                       asp-action="Details"
+                       asp-route-id="@product.Id">
+
+                        <!-- IMAGE -->
+                        <div class="product-img">
+                            <img src="@Url.Content(product.ImageUrl ?? "~/img/no-image.png")"
+                                 alt="@product.Name" />
+                        </div>
+
+                        <!-- NAME -->
+                        <div class="product-name">
+                            @product.Name
+                        </div>
+
+                        <!-- PRICE -->
+                        <div class="product-price">
+                            <span class="price-current">
+                                @product.Price.ToString("N0")đ
+                            </span>
+                            <span class="price-old">
+                                @((product.Price * 1.2m).ToString("N0"))đ
+                            </span>
+                        </div>
+
+                        <!-- RATING -->
+                        <div class="product-rating">
+                            ⭐ 5.0
+                        </div>
+                    </a>
+
+                    <!-- FAVORITE -->
+                    <div class="product-action">
+                        ❤ Favorite
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </section>
 </div>

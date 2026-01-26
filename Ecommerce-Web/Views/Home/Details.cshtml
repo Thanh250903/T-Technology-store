@@ -1,0 +1,29 @@
+﻿@using Ecommerce_Web.Models
+@model Product
+
+<div class="container py-4">
+    <a asp-controller="Home" asp-action="Index">← Back</a>
+
+    <div class="row mt-3">
+        <div class="col-md-5">
+            <img class="img-fluid"
+                 style="background:#f6f7f9;border-radius:14px;padding:12px;"
+                 src="@Url.Content(Model.ImageUrl ?? "~/img/no-image.png")"
+                 alt="@Model.Name" />
+        </div>
+
+        <div class="col-md-7">
+            <h2>@Model.Name</h2>
+            <h4 class="mt-3">@Model.Price.ToString("N0")đ</h4>
+
+            @if (Model.Category != null)
+            {
+                <div class="mt-2 text-muted">Category: @Model.Category.Name</div>
+            }
+
+            <div class="mt-4">
+                <button class="btn btn-danger">Add to cart</button>
+            </div>
+        </div>
+    </div>
+</div>

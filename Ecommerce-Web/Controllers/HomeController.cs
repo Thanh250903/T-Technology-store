@@ -10,9 +10,37 @@ namespace Ecommerce_Web.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext dbContext)
         {
-            return View();
+            _context = dbContext;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var productList = await _context.Products.
+                                    Where(activeP => activeP.IsActive).ToListAsync();
+
+            return View(productList);
+        }
+
+        public async Task<IActionResult> Details(string id)
+        {
+            if(string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var productDetails = await _context.Products
+                                       .FirstOrDefaultAsync(p => p.Id == id && p.IsActive == true);
+
+            if(productDetails == null)
+            {
+                return NotFound();
+            }
+
+            return View(productDetails);
         }
 
         public IActionResult Privacy()
