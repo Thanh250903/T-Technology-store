@@ -1,4 +1,6 @@
 using Ecommerce_Web.Data;
+using Ecommerce_Web.Models.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;    
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +10,22 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllersWithViews();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 app.UseStaticFiles();
 // Configure the HTTP request pipeline.
@@ -25,7 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseStatusCodePagesWithReExecute("/Error/{0}");
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

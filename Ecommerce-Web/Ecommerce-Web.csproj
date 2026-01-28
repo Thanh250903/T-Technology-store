@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\User\Controllers\" />
-    <Folder Include="Migration\" />
+    <Folder Include="Services\" />
     <Folder Include="wwwroot\img\products\" />
   </ItemGroup>
 
