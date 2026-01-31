@@ -1,59 +1,62 @@
 ﻿@using Ecommerce_Web.Models.ViewModels
 @model List<ProductVM>
+
 @{
     ViewData["Title"] = "Product List";
 }
 
-<div class="common-index container py-4">
+<div class="product-index container py-4">
 
     <!-- Header -->
-    <div class="common-index__header">
-        <h2 class="common-index__title">List of Products</h2>
+    <div class="product-index__header">
+        <h2 class="product-index__title">List of Products</h2>
 
         <a asp-controller="Product" asp-action="Create" class="btn btn-success">
             Add new Product
         </a>
     </div>
 
-    <!-- Toolbar  -->
-    <div class="common-index__toolbar">
-        <div class="toolbar-left">
-            <div class="common-search">
-                <span class="search-icon">🔎</span>
-                <input class="form-control" type="text" placeholder="Search a product" />
+    <!-- Toolbar -->
+    <div class="product-index__toolbar">
+        <div class="product-index__toolbar-left">
+            <div class="product-index__search">
+                <span class="product-index__search-icon">🔎</span>
+                <input class="form-control product-index__search-input"
+                       type="text"
+                       placeholder="Search a product" />
             </div>
         </div>
 
-        <div class="toolbar-right">
-            <select class="form-select toolbar-select">
+        <div class="product-index__toolbar-right">
+            <select class="form-select product-index__select">
                 <option selected>Filter by</option>
-                <option href="#">Name</option>
-                <option href="#">Category</option>
-                <option href="#">Day create</option>
-                <option href="#">Active status</option>
+                <option>Name</option>
+                <option>Category</option>
+                <option>Day create</option>
+                <option>Active status</option>
             </select>
 
-            <select class="form-select toolbar-select">
+            <select class="form-select product-index__select">
                 <option selected>Sort by</option>
-                <option href="#">Price low-high</option>
-                <option href="#">Price high-low</option>
+                <option>Price low-high</option>
+                <option>Price high-low</option>
                 <option>Newest</option>
             </select>
         </div>
     </div>
 
     <!-- Table card -->
-    <div class="common-table-card">
-        <table class="table common-table">
+    <div class="product-index__table-card">
+        <table class="table product-index__table">
             <thead>
                 <tr>
                     <td>Name</td>
                     <td>Category</td>
                     <td>Price</td>
                     <td>CreateAt</td>
-                    <td>Status</td>
-                    <td>Image</td>
-                    <td style="width:160px; text-align:center;">Action</td>
+                    <td class="product-index__status-cell">Status</td>
+                    <td class="product-index__img-cell">Image</td>
+                    <td class="product-index__actions-cell">Action</td>
                 </tr>
             </thead>
 
@@ -65,28 +68,29 @@
                         <td>@product.CategoryName</td>
                         <td>@product.Price</td>
                         <td>@product.CreateAt</td>
-                        <td class="status-td">
+
+                        <td class="product-index__status-cell">
                             @if (product.IsActive)
                             {
-                                <span class="status-dot status-dot--active" title="Active">
+                                <span class="product-index__status product-index__status--active" title="Active">
                                     <i class="bi bi-check-lg"></i>
                                     Active
                                 </span>
                             }
                             else
                             {
-                                <span class="status-dot status-dot--inactive" title="Inactive">
+                                <span class="product-index__status product-index__status--inactive" title="Inactive">
                                     <i class="bi bi-x-lg"></i>
-                                 Inactive
+                                    Inactive
                                 </span>
                             }
                         </td>
 
-                        <td class="img-td">
+                        <td class="product-index__img-cell">
                             @if (!string.IsNullOrEmpty(product.ImageUrl))
                             {
-                                <div class="img-box">
-                                    <img src="@product.ImageUrl" class="product-img" alt="product image" />
+                                <div class="product-index__img-box">
+                                    <img src="@product.ImageUrl" class="product-index__img" alt="product image" />
                                 </div>
                             }
                             else
@@ -95,15 +99,21 @@
                             }
                         </td>
 
-                        <td>
-                            <div class="action-btns">
-                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id"
+                        <td class="product-index__actions-cell">
+                            <div class="product-index__actions">
+                                <a asp-controller="Product"
+                                   asp-action="Edit"
+                                   asp-route-id="@product.Id"
                                    class="btn btn-primary btn-sm">
-                                   Edit</a>
+                                    Edit
+                                </a>
 
-                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id"
-                                   class="btn btn-danger btn-sm"> 
-                                   Delete</a>
+                                <a asp-controller="Product"
+                                   asp-action="Delete"
+                                   asp-route-id="@product.Id"
+                                   class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -112,3 +122,7 @@
         </table>
     </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/product-index.css" asp-append-version="true" />
+}

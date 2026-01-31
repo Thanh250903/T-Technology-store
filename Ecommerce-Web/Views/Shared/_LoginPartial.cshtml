@@ -1,28 +1,36 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Ecommerce_Web.Models.User
-
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+ 
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a class="header-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Tài khoản">
+            <img src="~/img/user_Login.png" alt="account" class="logo_login" />
+            <span>Xin chào @UserManager.GetUserName(User)</span>
+        </a>
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
-        </form>
-    </li>
+    <form class="logout-form"
+          asp-area="Identity"
+          asp-page="/Account/Logout"
+          asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"
+          method="post">
+        <button type="submit" class="header-item header-btn">
+            <img src="~/img/logout.png" alt="logout" class="logo_logout" />
+            <span>Đăng xuất</span>
+        </button>
+    </form>
+
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+    <a class="header-item" asp-area="Identity" asp-page="/Account/Login">
+        <img src="~/img/user_Login.png" alt="login" class="logo_login" />
+        <span>Đăng nhập</span>
+    </a>
+
+    <a class="header-item" asp-area="Identity" asp-page="/Account/Register">
+        <img src="~/img/register.png" alt="register" class="logo_login" />
+        <span>Đăng ký</span>
+    </a>
 }
-</ul>

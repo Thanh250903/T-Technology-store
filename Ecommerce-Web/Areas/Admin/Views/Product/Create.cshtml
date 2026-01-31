@@ -10,22 +10,18 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-
-            <!-- Name -->
             <div class="mb-3">
                 <label asp-for="Name" class="form-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
-            <!-- Price -->
             <div class="mb-3">
                 <label asp-for="Price" class="form-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
 
-            <!-- Category -->
             <div class="mb-3">
                 <label asp-for="CategoryId" class="form-label"></label>
                 <select asp-for="CategoryId"
@@ -36,14 +32,12 @@
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
 
-            <!-- CreateAt -->
             <div class="mb-3">
                 <label asp-for="CreateAt" class="form-label"></label>
                 <input asp-for="CreateAt" type="datetime-local" class="form-control" />
                 <span asp-validation-for="CreateAt" class="text-danger"></span>
             </div>
 
-            <!-- Image -->
             <div class="mb-3 row">
                 <label class="mb-2">Image</label>
 
@@ -61,31 +55,36 @@
                 <input type="file" name="formFile" id="formFile" class="form-control mt-2" />
             </div>
            
-            <!-- IsActive -->
             <div class="form-check mb-4">
                 <input asp-for="IsActive" class="form-check-input" />
                 <label asp-for="IsActive" class="form-check-label"></label>
             </div>
 
-            <!-- Actions -->
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary">
                     Create
                 </button>
+
                 <a asp-controller="Product"
                    asp-action="Index"
                    class="btn btn-outline-secondary">
                     Back to list
                 </a>
-                
+
             </div>
         </div>
     </div>
 </form>
 
+<!--ZoomOverLay outside-->
 <div id="imageZoomOverlay" class="image-zoom-overlay" aria-hidden="true">
     <div class="image-zoom-content" role="dialog" aria-modal="true">
         <button type="button" id="imageZoomClose" class="image-zoom-close" aria-label="Close">✕</button>
         <img id="imageZoomImg" src="" alt="Zoom image" />
     </div>
 </div>
+
+@section styles{
+     <link rel="stylesheet" href="~/css/product-index.css" asp-append-version="true" />
+}
+

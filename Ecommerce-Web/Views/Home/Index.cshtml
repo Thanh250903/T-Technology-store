@@ -1,6 +1,6 @@
 ﻿@using Ecommerce_Web.Models
 @model IEnumerable<Product>
-    <link rel="stylesheet" href="~/css/home-product.css" asp-append-version="true" />
+
 <div class="page-product">
 
     <section class="product-section">
@@ -63,3 +63,7 @@
         </div>
     </section>
 </div>
+
+@section styles {
+    <link rel="stylesheet" href="~/css/home-product.css" asp-append-version="true" />
+}

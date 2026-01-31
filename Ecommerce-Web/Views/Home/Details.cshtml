@@ -1,9 +1,7 @@
 ﻿@using Ecommerce_Web.Models
 @model Product
 
-    <link rel="stylesheet" href="~/css/productDetail.css" asp-append-version="true" />
     <a asp-controller="Home" asp-action="Index" class="btn btn-primary">← Back</a>
-
     <main class="productDetails" >
        <div class="productDetails_grid">
 
@@ -64,5 +62,8 @@
 
        </div>
     </main>
-        
+
+@section styles{
+    <link rel="stylesheet" href="~/css/productDetail.css" asp-append-version="true" />
+}  
 

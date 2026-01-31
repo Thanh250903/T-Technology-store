@@ -1,0 +1,241 @@
+﻿/* ===== Page wrapper ===== */
+.product-index {
+    max-width: 1200px;
+}
+
+/* ===== Header ===== */
+.product-index__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0 8px;
+}
+
+.product-index__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* ===== Toolbar ===== */
+.product-index__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+    margin: 10px 0 14px;
+}
+
+.product-index__toolbar-left {
+    flex: 1;
+    min-width: 220px;
+}
+
+.product-index__toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Search input */
+.product-index__search {
+    position: relative;
+    max-width: 320px;
+}
+
+.product-index__search-input {
+    width: 100%;
+    padding-left: 34px;
+    border-radius: 10px;
+}
+
+.product-index__search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+/* Dropdowns */
+.product-index__select {
+    min-width: 130px;
+    border-radius: 10px;
+}
+
+/* ===== Table card ===== */
+.product-index__table-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+.product-index__table {
+    margin: 0;
+}
+
+    .product-index__table thead td {
+        font-weight: 700;
+        color: #64748b;
+        background: #fbfbfd;
+        border-bottom: 1px solid #eef2f7;
+        padding: 14px 12px;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+    }
+
+    .product-index__table tbody td {
+        padding: 14px 12px;
+        vertical-align: middle;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    /* Row hover */
+    .product-index__table tbody tr:hover {
+        background: #fafafa;
+    }
+
+/* ===== Status ===== */
+.product-index__status-cell {
+    width: 110px;
+    text-align: center;
+}
+
+.product-index__status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.product-index__status--active {
+    color: #1e8e3e;
+}
+
+.product-index__status--inactive {
+    color: #d93025;
+}
+
+/* ===== Image cell ===== */
+.product-index__img-cell {
+    text-align: center;
+    width: 120px;
+}
+
+.product-index__img-box {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e5e7eb;
+}
+
+.product-index__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== Actions ===== */
+.product-index__actions-cell {
+    width: 160px;
+    text-align: center;
+}
+
+.product-index__actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+    .product-index__actions .btn {
+        border-radius: 10px;
+        padding: 6px 10px;
+    }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .product-index__toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .product-index__toolbar-right {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .product-index__search {
+        max-width: 100%;
+    }
+}
+
+.img-thumb {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+    .image-zoom-overlay.is-open {
+        display: flex;
+    }
+
+.image-zoom-content {
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+    .image-zoom-content img {
+        display: block;
+        max-width: min(900px, 85vw);
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+
+.image-zoom-close {
+    position: absolute;
+    top: -11px;
+    right: -12px;
+    border-radius: 999px;
+    border: none;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+}
+
