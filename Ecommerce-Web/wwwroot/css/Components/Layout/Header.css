@@ -21,10 +21,18 @@
     flex-direction: column;
 }
 
-.logo-red {
+.header-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    -ms-flex-direction: inherit;
+    -webkit-flex-direction: inherit;
+    flex-direction: inherit;
+}
+    .logo-red {
     color: #e30613;
     font-size: 28px;
-    font-weight: 800;
+    font-weight: 1000;
     line-height: 1;
 }
 
@@ -93,6 +101,11 @@
     }
 
 .logo_login {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+}
+.logo_logout {
     width: 24px;
     height: 24px;
     background-color: white;

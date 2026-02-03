@@ -1,5 +1,7 @@
 using Ecommerce_Web.Data;
 using Ecommerce_Web.Models.User;
+using Ecommerce_Web.Utility;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;    
 
@@ -9,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
@@ -27,8 +30,26 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 
-
 var app = builder.Build();
+
+//Seed Identity, Roles
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetService<ILoggerFactory>()?.CreateLogger("IdentitySeeder");
+
+    try
+    {
+        await IdentitySeeder.SeedRolesAsync(services, app.Configuration, logger);
+    }
+    catch (Exception ex)
+    {
+        logger?.LogError(ex, "Seeding identity failed, try again");
+        throw;
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
