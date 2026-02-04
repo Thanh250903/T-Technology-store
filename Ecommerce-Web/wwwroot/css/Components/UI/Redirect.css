@@ -1,0 +1,43 @@
+﻿.error-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1f2933, #111827);
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.error-box {
+    text-align: center;
+    padding: 40px;
+}
+
+.code {
+    font-size: 120px;
+    font-weight: 800;
+    margin: 0;
+    color: #ef4444;
+}
+
+.title {
+    font-size: 32px;
+    margin: 10px 0;
+}
+
+.description {
+    font-size: 16px;
+    color: #d1d5db;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.home-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: red;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+}

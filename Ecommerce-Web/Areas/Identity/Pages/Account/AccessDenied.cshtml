@@ -1,10 +1,23 @@
 ﻿@page
 @model AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Access Denied";
+    Layout = null;
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<link rel="stylesheet" href="~/css/Components/UI/Redirect.css" asp-append-version="true" />
+
+<div class="error-container">
+    <div class="error-box">
+        <h1 class="code">403</h1>
+        <h2 class="title">Access Denied</h2>
+        <p class="description">
+            You don’t have permission to access this page.
+        </p>
+
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="home-btn">
+            Return to home page
+        </a>
+    </div>
+</div>
+

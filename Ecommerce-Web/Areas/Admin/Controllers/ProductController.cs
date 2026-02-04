@@ -1,5 +1,6 @@
 ﻿using Ecommerce_Web.Data;
 using Ecommerce_Web.Models;
+using Ecommerce_Web.Models.Catalog;
 using Ecommerce_Web.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
