@@ -1,23 +1,16 @@
-﻿
-<div id="indexSuperCart" class="super-cart-container">
-    <div class="cart-header"></div>
-    <div class="container tabs-cart-type mt-3">
-        <div class="container block-info mt-3">
-            <div class="nothing-in-cart">
-                <img src="~/img/cart_empty.png" alt="Giỏ hàng rỗng" />
-                <span class="my-3">
-                    <br />
-                    <strong>Giỏ hàng của bạn đang trống.</strong>
-                    <br />
-                    Hãy chọn thêm sản phẩm để mua sắm nhé
-                </span>
-                <div class="mt-3">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-success">MUA HÀNG NGAY</a>
-                </div>
+﻿<div class="empty-cart-page">
+        <div class="empty-cart-body">
+            <img class="empty-cart-illustration" 
+            src="~/img/cart_empty.png" 
+            alt="Giỏ hàng trống" />
+
+            <div class="empty-cart-text"> 
+                <div class="empty-cart-main">Giỏ hàng của bạn đang trống</div>
+                <div class="empty-cart-sub">Thêm sản phẩm vào để lấp đầy giỏ hàng nhé</div>
             </div>
         </div>
-    </div>
-    <div id="stickyBottomBar">
-        <a asp-area="" asp-controller="Home" asp-action="Index"></a>
-    </div>
+
+    <footer class="empty-cart-footer">
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="empty-cart-button">Quay lại trang chủ</a>
+    </footer>
 </div>

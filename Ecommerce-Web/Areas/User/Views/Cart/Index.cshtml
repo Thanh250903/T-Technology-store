@@ -4,38 +4,21 @@
     ViewData["Title"] = "Giỏ hàng";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/Components/Layout/Cart.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Components/Layout/emptyCart.css" asp-append-version="true" />
+}
 
-<div class="page-head">
-    <div class="page-title">Giỏ hàng</div>
+<div class="cart-header" >
+    <div class="page-title">Giỏ hàng của bạn</div>
 </div>
 
 @if (Model == null || !Model.Any())
 {
-     @Html.Partial("_EmptyCart") 
+    <partial name="_EmptyCart" />
 }
 else
 {
-    <div class="tool-card">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>Product name</td>
-                        <td>Price</td>
-                        <td>Qty</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
 }
 
 
